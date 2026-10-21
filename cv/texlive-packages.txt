@@ -1,0 +1,17 @@
+latexmk
+geometry
+titlesec
+xcolor
+enumitem
+hyperref
+bookmark
+changepage
+paracol
+needspace
+iftex
+etoolbox
+sourcesans
+xkeyval
+fontaxes
+mweights
+ly1

@@ -1,0 +1,74 @@
+# One entry per position, listed newest first by start date.
+# Leave out `end` for your current position. Text can use **bold**.
+#
+# The website shows `summary`, `skills`, `tools` and `links`. The one-page CV shows
+# `cvHighlights` as bullet points (or `summary.en` if there are none) and `tools`.
+#
+# Before publishing, confirm with T2P what you may say publicly about this work,
+# especially fraud and scam detection. Keep it high level (no rules, thresholds or model features).
+
+# DRAFT: written from the paper's public abstract. Rewrite the summary
+# as what YOU did, and check the start date and tools.
+chula-research:
+  company: Data MIND Lab, Chulalongkorn University
+  location: Bangkok, Thailand
+  role:
+    en: Graduate Researcher
+    th: นักวิจัยระดับบัณฑิตศึกษา
+  collaboration:
+    text:
+      en: In collaboration with Google Research's TASC team
+      th: ร่วมกับทีม TASC ของ Google Research
+    url: https://research.google/blog/responsible-ai-at-google-research-technology-ai-society-and-culture/
+  start: 2025-07
+  summary:
+    en: "Part-time master's research on how NLP researchers report the limitations of their own work: a large-scale analysis of the Limitations sections in ACL and EMNLP papers (2020–2025) using a human–AI qualitative coding framework. First-author paper in **Findings of EMNLP 2026**."
+    th: "งานวิจัยระดับปริญญาโท (ภาคนอกเวลาราชการ) ว่านักวิจัย NLP รายงานข้อจำกัดของงานตัวเองอย่างไร วิเคราะห์ส่วน Limitations ของ paper จาก ACL และ EMNLP (2020–2025) ในวงกว้างด้วย framework แบบ human–AI สำหรับ qualitative coding เป็นผู้แต่งลำดับแรกของ paper ใน **Findings of EMNLP 2026**"
+  cvHighlights:
+    - Part-time master's research on how NLP researchers report the limitations of their own work
+    - Analyzed Limitations sections in ACL and EMNLP papers (2020–2025) with a human–AI qualitative coding framework
+    - First-author paper in **Findings of EMNLP 2026**
+  skills: [Qualitative Coding, Human–AI Annotation, NLP, Data Analysis, Research Writing]
+  tools: []
+  links:
+    - label: Project page
+      url: https://sundione.github.io/what-limits-us/
+    - label: arXiv
+      url: https://arxiv.org/abs/2609.15191
+
+t2p-data-scientist:
+  company: T2P Co., Ltd.
+  companyUrl: https://www.t2pco.com/th
+  location: Bangkok, Thailand
+  role:
+    en: Data Scientist
+    th: Data Scientist
+  start: 2023-08
+  summary:
+    en: Build machine learning and LLM services for a digital-wallet fintech platform, from prototype to production — real-time fraud and risk scoring, anomaly detection and transaction monitoring; LLM services for text generation, receipt extraction and dashboard summaries; ID-document OCR; and customer segmentation and churn models. Also run the Metabase dashboards, reports and Airflow pipelines behind the company's own monitoring for Bank of Thailand requirements, and work fluently with AI coding agents to learn codebases and explain changes to the team.
+    th: พัฒนาบริการ machine learning และ LLM ให้แพลตฟอร์มฟินเทคด้าน digital wallet ตั้งแต่ต้นแบบจนขึ้น production ได้แก่ การประเมินความเสี่ยงและตรวจจับการฉ้อโกงแบบ real-time, anomaly detection และการเฝ้าระวังธุรกรรม, บริการ LLM สำหรับสร้างข้อความ ดึงข้อมูลจากใบเสร็จ และสรุป dashboard, OCR เอกสารยืนยันตัวตน รวมถึง model แบ่งกลุ่มลูกค้าและทำนายการเลิกใช้งาน นอกจากนี้ดูแล dashboard และรายงานบน Metabase และ pipeline บน Airflow ที่ใช้ monitoring ฝั่งบริษัทตามข้อกำหนดของ ธปท. และใช้ AI coding agent อย่างคล่องแคล่วเพื่อศึกษา codebase และอธิบายงานให้ทีมเข้าใจ
+  cvHighlights:
+    - Build machine learning and LLM services for a digital-wallet fintech platform, from prototype to production
+    - "**Fraud & risk:** real-time risk scoring, anomaly detection and transaction monitoring"
+    - "**LLM & vision:** text generation, receipt extraction, dashboard summaries and ID-document OCR"
+    - "**Data:** Metabase dashboards and Airflow pipelines for Bank of Thailand monitoring; segmentation and churn models"
+    - Fluent with AI coding agents to learn codebases and explain changes to the team
+  skills: [Fraud & Risk Detection, Anomaly Detection, Supervised ML, LLM Applications, Computer Vision & OCR, Stream Processing, MLOps, Customer Segmentation, Dashboards & Reporting, Regulatory Monitoring, AI Coding Agents]
+  tools: [Python, SQL, FastAPI, "AWS (Lambda, S3, DynamoDB, Redshift)", Kafka, Docker, Kubernetes, Airflow, MLflow, Metabase, scikit-learn, XGBoost, LightGBM, OpenAI, Gemini, OpenCV]
+
+t2p-data-scientist-intern:
+  company: T2P Co., Ltd.
+  companyUrl: https://www.t2pco.com/th
+  location: Bangkok, Thailand
+  role:
+    en: Data Scientist Intern
+    th: นักศึกษาฝึกงาน Data Scientist
+  start: 2023-06
+  end: 2023-07
+  summary:
+    en: Detected suspicious wallets and transactions in an e-wallet app with unsupervised learning, and built a customer churn model to support retention marketing.
+    th: ตรวจจับ wallet และธุรกรรมที่น่าสงสัยในแอป e-wallet ด้วย unsupervised learning และสร้าง model ทำนายการเลิกใช้งานของลูกค้าเพื่อช่วยการตลาดด้าน retention
+  cvHighlights:
+    - Detected suspicious wallets and transactions with unsupervised learning; built a customer churn model
+  skills: [Anomaly Detection, Unsupervised Learning, Churn Prediction]
+  tools: [Python, Isolation Forest, AutoEncoder]

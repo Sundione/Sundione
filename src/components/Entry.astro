@@ -1,0 +1,55 @@
+---
+// One row of a dated list: the date on the left, the details on the right.
+interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+---
+
+<article class="entry">
+  <p class="date mono muted">{date}</p>
+  <div class="body"><slot /></div>
+</article>
+
+<style>
+  .entry {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .date {
+    padding-top: 0.2rem;
+  }
+
+  .body :global(h3) {
+    font-size: 1.125rem;
+  }
+
+  .body :global(.secondary) {
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .body :global(.highlights) {
+    margin: 0.5rem 0 0;
+    padding-left: 1.125rem;
+    color: var(--muted);
+  }
+
+  .body :global(.highlights li::marker) {
+    color: var(--accent);
+  }
+
+  .body :global(.highlights strong) {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  @media (min-width: 40rem) {
+    .entry {
+      grid-template-columns: var(--label-width) 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

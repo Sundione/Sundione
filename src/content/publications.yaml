@@ -1,0 +1,27 @@
+# One entry per publication, listed newest first by date.
+# `doi` or `arxiv` gives the link; `venue` is where it was published.
+
+what-limits-us:
+  title: "What Limits Us? Analyzing Self-Reported Limitations in NLP Research"
+  authors:
+    - Tawan Thaepprasit
+    - Peeranuth Kehasukcharoen
+    - Ding Wang
+    - Remi Denton
+    - Peerapon Vateekul
+    - Piyawat Lertvittayakumjorn
+  venue: Findings of EMNLP 2026
+  date: 2026-09
+  arxiv: "2609.15191"
+
+lmao-alice-o2:
+  title: Anomaly Detection in Large-Scale Monitoring Systems using a Language Model
+  authors:
+    - Supasate Vorathammathorn
+    - Nopphakorn Subsa-ard
+    - Tawan Thaepprasit
+    - Phond Phunchongharn
+    - Sansiri Tarnpradab
+  venue: SCA '25 (Supercomputing Asia Conference), ACM
+  date: 2025-03
+  doi: 10.1145/3718350.3718354

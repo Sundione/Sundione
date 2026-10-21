@@ -1,0 +1,51 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { locales, localeLabels, useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  /** The page path without the locale prefix, so switching language stays on the same page. */
+  path?: string;
+}
+
+const { locale, path = '' } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<ul class="lang mono" aria-label={t('nav.language')}>
+  {
+    locales.map((l) => (
+      <li>
+        <a href={getRelativeLocaleUrl(l, path)} lang={l} hreflang={l} aria-current={l === locale ? 'page' : undefined}>
+          {localeLabels[l]}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .lang {
+    display: flex;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li + li::before {
+    content: '/';
+    margin-inline: 0.5rem;
+    color: var(--rule);
+  }
+
+  a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  a[aria-current='page'] {
+    color: var(--text);
+    font-weight: 600;
+  }
+</style>

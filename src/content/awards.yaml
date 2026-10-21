@@ -1,0 +1,46 @@
+# Awards, shown by `order`. Only list things you won or placed in.
+# `program` groups awards from the same program into one entry on the CV.
+
+super-ai-ss4-bronze:
+  order: 1
+  title:
+    en: Bronze Medal
+    th: เหรียญทองแดง
+  event: Super AI Engineer Season 4
+  year: 2024
+
+image-captioning:
+  order: 2
+  title:
+    en: 1st Runner-Up
+    th: รองชนะเลิศอันดับ 1
+  event: Image Captioning Hackathon
+  program: Super AI Engineer Season 4
+  year: 2024
+
+table-thaiqa:
+  order: 3
+  title:
+    en: 1st Runner-Up
+    th: รองชนะเลิศอันดับ 1
+  event: Table-based ThaiQA with LLM Hackathon
+  program: Super AI Engineer Season 4
+  year: 2024
+
+brain-motor-imagery:
+  order: 4
+  title:
+    en: 2nd Runner-Up
+    th: รองชนะเลิศอันดับ 2
+  event: Brain Motor Imagery Hackathon
+  program: Super AI Engineer Season 4
+  year: 2024
+
+home-credit:
+  order: 5
+  title:
+    en: 2nd Runner-Up
+    th: รองชนะเลิศอันดับ 2
+  event: Home Credit – Credit Risk Modeling with LLM Hackathon
+  program: Super AI Engineer Season 4
+  year: 2024

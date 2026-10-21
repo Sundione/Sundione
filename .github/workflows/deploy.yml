@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  # Pinned TinyTeX release; bump it to update LaTeX.
+  TINYTEX_VERSION: '2026.10'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Cache TinyTeX
+        id: tinytex-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.TinyTeX
+          key: tinytex-${{ runner.os }}-${{ env.TINYTEX_VERSION }}-${{ hashFiles('cv/texlive-packages.txt') }}
+
+      - name: Install TinyTeX and CV packages
+        if: steps.tinytex-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -fsSL https://yihui.org/tinytex/install-bin-unix.sh | sh
+          ~/.TinyTeX/bin/x86_64-linux/tlmgr install $(cat cv/texlive-packages.txt)
+
+      - name: Add TinyTeX to PATH
+        run: echo "$HOME/.TinyTeX/bin/x86_64-linux" >> "$GITHUB_PATH"
+
+      - name: Install pdftoppm for CV page previews
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+
+      # Runs `npm run build`, which builds the CV and then the site.
+      - uses: withastro/action@v6
+        with:
+          node-version: 24
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

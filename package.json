@@ -1,0 +1,26 @@
+{
+  "name": "sundione-portfolio",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "cv": "node scripts/cv.mjs",
+    "cv:private": "node scripts/cv.mjs --private",
+    "build": "npm run cv && astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/ibm-plex-sans-thai": "^5.3.0",
+    "astro": "^7.4.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.11",
+    "@types/node": "^24.19.2",
+    "typescript": "^6.0.3",
+    "yaml": "^2.9.1"
+  }
+}

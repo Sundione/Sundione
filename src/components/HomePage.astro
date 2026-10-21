@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from './SiteHeader.astro';
+import Sidebar from './Sidebar.astro';
+import Experience from './Experience.astro';
+import Publications from './Publications.astro';
+import Education from './Education.astro';
+import Awards from './Awards.astro';
+import Contact from './Contact.astro';
+import { useTranslations, type Locale } from '../i18n/ui';
+import { getProfile } from '../utils/content';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const profile = await getProfile();
+---
+
+<Base locale={locale} title={`${profile.name} — ${profile.role[locale]}`} description={t('meta.description')}>
+  <SiteHeader locale={locale} />
+  <div class="page">
+    <Sidebar locale={locale} />
+    <main>
+      <Experience locale={locale} />
+      <Publications locale={locale} />
+      <Education locale={locale} />
+      <Awards locale={locale} />
+      <Contact locale={locale} />
+      <footer class="footer mono muted no-print">
+        © {new Date().getFullYear()} {profile.name} · {t('footer.built')}
+      </footer>
+    </main>
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+    max-width: var(--reading-width);
+    padding-bottom: 3rem;
+  }
+
+  .footer {
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  @media (min-width: 40rem) {
+    .page {
+      padding-inline: 2rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .page {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      gap: 5rem;
+      padding-inline: 3rem;
+    }
+
+    main {
+      padding-block: 4rem 5rem;
+    }
+  }
+
+  @media print {
+    .page {
+      display: block;
+      max-width: none;
+      padding: 0;
+    }
+
+    main {
+      gap: 1.5rem;
+      max-width: none;
+      padding: 0;
+    }
+  }
+</style>

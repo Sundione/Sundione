@@ -1,0 +1,6 @@
+# Copy to cv/private.yaml (gitignored) for `npm run cv:private`.
+# These details are added to the private CV only — never to the website or public PDF.
+phone:
+  tel: "+66-00-000-0000"
+  label: "000 000 0000"
+address: "District, Province"

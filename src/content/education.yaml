@@ -1,0 +1,34 @@
+# One entry per degree, listed newest first by start date.
+
+chula-meng:
+  institution: Chulalongkorn University
+  location: Bangkok, Thailand
+  degree:
+    en: Master of Computer Engineering
+    th: วิศวกรรมศาสตรมหาบัณฑิต สาขาวิศวกรรมคอมพิวเตอร์
+  mode:
+    en: Part-time
+    th: ภาคนอกเวลาราชการ
+  start: 2025-07
+  # Omit `end` while studying; `expected` is the expected graduation year.
+  expected: 2027
+  # A position you held during the degree.
+  position:
+    en: Member, Data MIND Lab
+    th: สมาชิก Data MIND Lab
+
+kmutt-beng:
+  institution: King Mongkut’s University of Technology Thonburi
+  location: Bangkok, Thailand
+  degree:
+    en: Bachelor of Computer Engineering
+    th: วิศวกรรมศาสตรบัณฑิต สาขาวิศวกรรมคอมพิวเตอร์
+  honors:
+    en: Second-Class Honors
+    th: เกียรตินิยมอันดับ 2
+  gpa: 3.59/4.0
+  start: 2020-07
+  end: 2024-05
+  position:
+    en: President, Computer Engineering Student Union (2022)
+    th: นายกองค์กรนักศึกษาวิศวกรรมคอมพิวเตอร์ (2022)

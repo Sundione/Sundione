@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+import SiteHeader from './SiteHeader.astro';
+import { useTranslations, type Locale } from '../i18n/ui';
+import { getCvManifest, getProfile } from '../utils/content';
+import { withBase } from '../utils/url';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const profile = await getProfile();
+const cv = getCvManifest();
+const updated =
+  cv &&
+  new Intl.DateTimeFormat(locale === 'th' ? 'th-TH' : 'en-US', { dateStyle: 'long' }).format(new Date(cv.updated));
+---
+
+<Base locale={locale} title={`${t('cv.title')} — ${profile.name}`} description={t('meta.description')}>
+  <SiteHeader locale={locale} path="cv" />
+  <div class="page">
+    <main>
+      <h1>{profile.name} <span class="muted">· {t('cv.title')}</span></h1>
+      {
+        cv ? (
+          <>
+            <p class="meta mono muted">
+              {t('cv.updated')} {updated}
+              {locale !== 'en' && <> · {t('cv.language')}</>}
+            </p>
+            <div class="downloads">
+              <a class="button" href={withBase(`cv/${cv.pdf}`)} download>
+                {t('cv.pdf')}
+              </a>
+              <a class="mono" href={withBase(`cv/${cv.tex}`)} download>
+                {t('cv.tex')}
+              </a>
+            </div>
+            {/* Wide screens: the real PDF (selectable, zoomable). Phones: page images, since
+                mobile browsers render embedded PDFs poorly. */}
+            <iframe
+              class="pdf"
+              src={`${withBase(`cv/${cv.pdf}`)}#view=FitH`}
+              title={`${t('cv.title')} ${profile.name} (PDF)`}
+              style={cv.pages[0] ? `aspect-ratio: ${cv.pages[0].width} / ${cv.pages[0].height}` : undefined}
+            />
+            {cv.pages.length > 0 ? (
+              <div class="pages">
+                {cv.pages.map((page, i) => (
+                  <img
+                    src={withBase(`cv/${page.file}`)}
+                    alt={`${t('cv.title')} ${profile.name}, ${i + 1}/${cv.pages.length}`}
+                    width={page.width}
+                    height={page.height}
+                    loading={i === 0 ? 'eager' : 'lazy'}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p class="note muted">
+                {t('cv.noPreview')} <a href={withBase(`cv/${cv.pdf}`)}>PDF ↗</a>
+              </p>
+            )}
+          </>
+        ) : (
+          <p class="note muted">{t('cv.missing')}</p>
+        )
+      }
+    </main>
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 56rem;
+    margin-inline: auto;
+    padding: 3rem 1rem 4rem;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 5vw, 2.25rem);
+    letter-spacing: -0.01em;
+  }
+
+  h1 .muted {
+    font-weight: 400;
+  }
+
+  .meta {
+    margin-top: 0.5rem;
+  }
+
+  .downloads {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .button {
+    padding: 0.5rem 1.125rem;
+    border-radius: 999px;
+    background: var(--text);
+    color: var(--bg);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9375rem;
+  }
+
+  .button:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .pages {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  /* The pages stay white in dark mode, like paper. */
+  .pages img {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border: 1px solid var(--rule);
+  }
+
+  .note {
+    margin-top: 2rem;
+  }
+
+  .pdf {
+    display: none;
+    width: 100%;
+    min-height: 40rem;
+    margin-top: 2.5rem;
+    border: 1px solid var(--rule);
+    background: #fff;
+  }
+
+  @media (min-width: 52rem) {
+    .pdf {
+      display: block;
+    }
+
+    .pages,
+    .note {
+      display: none;
+    }
+  }
+
+  @media (min-width: 40rem) {
+    .page {
+      padding-inline: 2rem;
+    }
+  }
+</style>

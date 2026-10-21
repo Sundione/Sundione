@@ -1,0 +1,35 @@
+# Your public profile. Used by both the website and the CV (`npm run cv`).
+# Text can use **bold**. The CV uses the English (`en`) text.
+#
+# Never put your phone number or home address here — this repo is public.
+# Those go in cv/private.yaml (gitignored) and only appear in `npm run cv:private`.
+
+me:
+  name: Tawan Thaepprasit
+  role:
+    en: Data Scientist
+    th: Data Scientist
+  # Short pitch: the website sidebar and the top of the CV. Can use **bold**.
+  bio:
+    en: Data Scientist at a fintech company and part-time Computer Engineering master's student at Chulalongkorn University, building AI- and data-driven tools. Bronze medalist, Super AI Engineer Season 4.
+    th: Data Scientist ในบริษัทฟินเทค และนักศึกษาปริญญาโทวิศวกรรมคอมพิวเตอร์ภาคนอกเวลาราชการ จุฬาลงกรณ์มหาวิทยาลัย ทำเครื่องมือที่ขับเคลื่อนด้วย AI และข้อมูล ได้รับเหรียญทองแดงจากโครงการ Super AI Engineer Season 4
+  location:
+    en: Bangkok, Thailand
+    th: กรุงเทพฯ
+  email: tawanth.official@gmail.com
+  website: https://sundione.github.io/Sundione/
+  # File name in src/assets/ (square, at least 400×400), or null to show an initial.
+  photo: profile.jpg
+  # One line under the bio, linking to the most important thing on the page.
+  highlight:
+    text:
+      en: First-author paper at EMNLP 2026 (Findings), with Google's TASC team
+      th: Paper ผู้แต่งลำดับแรกใน EMNLP 2026 (Findings) ร่วมกับทีม TASC ของ Google
+    href: "#chula-research"
+  links:
+    - label: LinkedIn
+      url: https://www.linkedin.com/in/tawan-thaepprasit-9ba937248/
+      # Shorter text shown on the CV. Links without it are left off the CV.
+      cvLabel: linkedin.com/tawan-thaepprasit
+    - label: GitHub
+      url: https://github.com/Sundione

@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import Entry from './Entry.astro';
+import SectionHeading from './SectionHeading.astro';
+import { formatMonth, sectionNumber, useTranslations, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const degrees = (await getCollection('education')).sort((a, b) => b.data.start.localeCompare(a.data.start));
+// Thai dates use the Buddhist calendar, so the expected year follows suit.
+const year = (y: number) => (locale === 'th' ? y + 543 : y);
+const period = (start: string, end?: string, expected?: number) =>
+  `${formatMonth(start, locale)} – ${
+    end ? formatMonth(end, locale) : expected ? `${t('education.expected')} ${year(expected)}` : t('experience.present')
+  }`;
+---
+
+<section id="education" aria-labelledby="education-heading">
+  <SectionHeading index={sectionNumber('education')} id="education">{t('nav.education')}</SectionHeading>
+  <ol class="list">
+    {
+      degrees.map(({ data }) => (
+        <li>
+          <Entry date={period(data.start, data.end, data.expected)}>
+            <h3>{data.institution}</h3>
+            <p>
+              {data.degree[locale]}
+              {data.mode && <span class="muted"> · {data.mode[locale]}</span>}
+              {data.honors && <span class="muted"> · {data.honors[locale]}</span>}
+            </p>
+            {data.gpa && <p class="detail mono muted">GPA {data.gpa}</p>}
+            {data.position && <p class="detail position">{data.position[locale]}</p>}
+          </Entry>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .detail {
+    margin-top: 0.25rem;
+  }
+
+  .position {
+    color: var(--muted);
+  }
+
+  .position::before {
+    content: '↳ ';
+    color: var(--accent);
+  }
+
+  @media print {
+    .list {
+      gap: 1rem;
+    }
+  }
+</style>

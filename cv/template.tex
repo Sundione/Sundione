@@ -1,0 +1,115 @@
+% CV template. `npm run cv` fills in the <<...>> placeholders from the YAML in
+% src/content/ and writes the result to public/cv/. Edit the layout here; edit
+% the content in the YAML files. Based on the RenderCV "classic" LaTeX theme,
+% set in Source Sans with more open spacing for easier reading.
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot,
+    top=1.4cm,
+    bottom=1.4cm,
+    left=1.8cm,
+    right=1.8cm,
+    footskip=1cm,
+]{geometry}
+\usepackage{titlesec} % section titles
+\usepackage[dvipsnames]{xcolor}
+\definecolor{primaryColor}{RGB}{0, 0, 0}
+\definecolor{secondary}{HTML}{555555} % dates, authors, tool lists
+\usepackage{enumitem} % lists
+\usepackage{etoolbox} % \AtBeginEnvironment
+\usepackage[
+    pdftitle={<<PDF_TITLE>>},
+    pdfauthor={<<PDF_AUTHOR>>},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref}
+\usepackage{bookmark}
+\usepackage{calc} % length arithmetic such as 5pt - 0.3cm
+\usepackage{changepage} % adjustwidth, for one-column entries
+\usepackage{paracol} % two-column entries
+\usepackage{needspace} % no page break right after a section title
+\usepackage{iftex}
+
+% Make the PDF machine readable for applicant tracking systems (ATS):
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+\fi
+
+% Source Sans 3: clear on screen and in print; semibold keeps bold text from shouting.
+\usepackage[default, semibold, lining]{sourcesans}
+\linespread{1.06}
+
+% Settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt}
+\pagestyle{empty}
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\topskip}{0pt}
+\setlength{\columnsep}{0.15cm}
+\pagenumbering{gobble}
+
+% Sections get clearly more space above them than entries do, so the groups read at a glance.
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+\titlespacing{\section}{-1pt}{0.42cm}{0.22cm}
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$}
+
+% Bullet points under an entry.
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.06cm,
+        parsep=0.04cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=12pt
+    ]
+}{
+    \end{itemize}
+}
+
+% A full-width entry. The tiny non-zero margins are needed: with exactly 0cm,
+% adjustwidth skips its list setup and the right column of twocolentry disappears.
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{0cm + 0.00001cm}{0cm + 0.00001cm}
+}{
+    \end{adjustwidth}
+}
+
+% An entry with a right-aligned second column (dates or a link): \begin{twocolentry}{<right>} <left> \end{twocolentry}
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft {\color{secondary}\secondColumn}
+    \end{paracol}
+    \endonecolentry
+}
+
+% The name and contact line at the top.
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}\hypersetup{urlcolor=secondary}
+}{
+    \par\kern\topsep
+}
+
+% A vertical bar between contact details.
+\newsavebox\ANDbox
+\sbox\ANDbox{$|$}
+\newcommand{\AND}{\unskip
+    \cleaders\copy\ANDbox\hskip\wd\ANDbox
+    \ignorespaces
+}
+
+\begin{document}
+
+<<BODY>>
+
+\end{document}
