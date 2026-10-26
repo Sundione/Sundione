@@ -1,5 +1,6 @@
 # One entry per publication, listed newest first by date.
-# `doi` or `arxiv` gives the link; `venue` is where it was published.
+# `anthology` (ACL Anthology id), `doi` or `arxiv` gives the link, in that order of
+# preference; `venue` is where it was published.
 
 what-limits-us:
   title: "What Limits Us? Analyzing Self-Reported Limitations in NLP Research"
@@ -12,6 +13,7 @@ what-limits-us:
     - Piyawat Lertvittayakumjorn
   venue: Findings of EMNLP 2026
   date: 2026-09
+  anthology: 2026.findings-emnlp.2386
   arxiv: "2609.15191"
 
 lmao-alice-o2:

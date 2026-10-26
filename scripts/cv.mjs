@@ -83,11 +83,13 @@ const formatMonth = (value) => {
 
 const dateRange = (start, end, open = 'Present') => `${formatMonth(start)} – ${end ? formatMonth(end) : open}`;
 
-/** Where a publication lives: its DOI, or its arXiv page. The website uses the same labels. */
+/** Where a publication lives: ACL Anthology, else DOI, else arXiv. The website uses the same labels. */
 const publicationLink = (p) =>
-  p.doi
-    ? { url: `https://doi.org/${p.doi}`, label: `doi:${p.doi}` }
-    : { url: `https://arxiv.org/abs/${p.arxiv}`, label: `arXiv:${p.arxiv}` };
+  p.anthology
+    ? { url: `https://aclanthology.org/${p.anthology}/`, label: `aclanthology.org/${p.anthology}` }
+    : p.doi
+      ? { url: `https://doi.org/${p.doi}`, label: `doi:${p.doi}` }
+      : { url: `https://arxiv.org/abs/${p.arxiv}`, label: `arXiv:${p.arxiv}` };
 
 const highlights = (items) =>
   items?.length

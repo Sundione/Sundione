@@ -16,14 +16,14 @@ I'm a Data Scientist at [T2P](https://www.t2pco.com/th), building machine learni
 
 ### Highlights
 
-- **First-author paper, [Findings of EMNLP 2026](https://arxiv.org/abs/2609.15191):** a large-scale analysis of how NLP researchers report the limitations of their own work. See the [project page](https://sundione.github.io/what-limits-us/).
+- **First-author paper, [Findings of EMNLP 2026](https://aclanthology.org/2026.findings-emnlp.2386/):** a large-scale analysis of how NLP researchers report the limitations of their own work. See the [project page](https://sundione.github.io/what-limits-us/).
 - **Bronze medal, Super AI Engineer Season 4**, plus four hackathon podium finishes.
 - **At work:** fraud and risk scoring, transaction monitoring, LLM services, ID-document OCR and customer segmentation, from prototype to production.
 
 ### Publications
 
 - **What Limits Us? Analyzing Self-Reported Limitations in NLP Research**<br>
-  *Findings of EMNLP 2026* · [arXiv:2609.15191](https://arxiv.org/abs/2609.15191)
+  *Findings of EMNLP 2026* · [ACL Anthology](https://aclanthology.org/2026.findings-emnlp.2386/) · [arXiv:2609.15191](https://arxiv.org/abs/2609.15191)
 - **Anomaly Detection in Large-Scale Monitoring Systems using a Language Model**<br>
   *SCA '25 (Supercomputing Asia Conference), ACM* · [doi:10.1145/3718350.3718354](https://doi.org/10.1145/3718350.3718354)
 

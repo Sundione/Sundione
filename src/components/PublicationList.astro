@@ -12,17 +12,20 @@ const { locale } = Astro.props;
 const profile = await getProfile();
 const publications = (await getCollection('publications')).sort((a, b) => b.data.date.localeCompare(a.data.date));
 
-// Same labels as the CV (scripts/cv.mjs).
-const link = (p: { doi?: string; arxiv?: string }) =>
-  p.doi
-    ? { url: `https://doi.org/${p.doi}`, label: `doi:${p.doi}` }
-    : { url: `https://arxiv.org/abs/${p.arxiv}`, label: `arXiv:${p.arxiv}` };
+// Published version first. Same labels as the CV (scripts/cv.mjs), which shows only the first.
+const links = (p: { anthology?: string; doi?: string; arxiv?: string }) =>
+  [
+    p.anthology && { url: `https://aclanthology.org/${p.anthology}/`, label: `aclanthology.org/${p.anthology}` },
+    p.doi && { url: `https://doi.org/${p.doi}`, label: `doi:${p.doi}` },
+    p.arxiv && { url: `https://arxiv.org/abs/${p.arxiv}`, label: `arXiv:${p.arxiv}` },
+  ].filter((l) => !!l);
 ---
 
 <ol class="list">
   {
     publications.map(({ data }) => {
-      const { url, label } = link(data);
+      const all = links(data);
+      const url = all[0].url;
       return (
         <li>
           <Entry date={formatMonth(data.date, locale)}>
@@ -39,9 +42,11 @@ const link = (p: { doi?: string; arxiv?: string }) =>
             </p>
             <p class="source">
               <span class="venue">{data.venue}</span>
-              <a class="mono" href={url}>
-                {label} ↗
-              </a>
+              {all.map((l) => (
+                <a class="mono" href={l.url}>
+                  {l.label} ↗
+                </a>
+              ))}
             </p>
           </Entry>
         </li>

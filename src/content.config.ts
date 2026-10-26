@@ -71,10 +71,12 @@ const publications = defineCollection({
       authors: z.array(z.string()).min(1),
       venue: z.string(),
       date: yearMonth,
+      // ACL Anthology id, e.g. 2026.findings-emnlp.2386
+      anthology: z.string().optional(),
       doi: z.string().optional(),
       arxiv: z.string().optional(),
     })
-    .refine((p) => p.doi || p.arxiv, 'Give a `doi` or an `arxiv` id.'),
+    .refine((p) => p.anthology || p.doi || p.arxiv, 'Give an `anthology`, `doi` or `arxiv` id.'),
 });
 
 const awards = defineCollection({

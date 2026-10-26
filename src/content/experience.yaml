@@ -31,6 +31,8 @@ chula-research:
   skills: [Qualitative Coding, Human–AI Annotation, NLP, Data Analysis, Research Writing]
   tools: []
   links:
+    - label: Paper (ACL Anthology)
+      url: https://aclanthology.org/2026.findings-emnlp.2386/
     - label: Project page
       url: https://sundione.github.io/what-limits-us/
     - label: arXiv
