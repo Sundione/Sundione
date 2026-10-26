@@ -7,8 +7,10 @@ import Publications from './Publications.astro';
 import Education from './Education.astro';
 import Awards from './Awards.astro';
 import Contact from './Contact.astro';
+import { getCollection } from 'astro:content';
 import { useTranslations, type Locale } from '../i18n/ui';
-import { getProfile } from '../utils/content';
+import { getProfile, getShareImage } from '../utils/content';
+import { plain } from '../utils/rich';
 
 interface Props {
   locale: Locale;
@@ -17,9 +19,36 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const profile = await getProfile();
+const description = `${profile.name} — ${plain(profile.bio[locale])}`;
+
+// Structured data (schema.org Person) so search engines can tie the name, photo and profiles together.
+const experience = await getCollection('experience');
+const education = await getCollection('education');
+const image = await getShareImage(Astro.site!);
+const organization = (name: string, url?: string) => ({ '@type': 'Organization', name, ...(url && { url }) });
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${profile.website}#person`,
+  name: profile.name,
+  url: profile.website,
+  jobTitle: profile.role.en,
+  description: plain(profile.bio[locale]),
+  ...(image && { image: image.url }),
+  ...(profile.email && { email: `mailto:${profile.email}` }),
+  worksFor: experience
+    .filter(({ data }) => !data.end && data.companyUrl)
+    .map(({ data }) => organization(data.company, data.companyUrl)),
+  affiliation: education.filter(({ data }) => !data.end).map(({ data }) => organization(data.institution)),
+  alumniOf: education.filter(({ data }) => data.end).map(({ data }) => organization(data.institution)),
+  sameAs: [...profile.links.map((l) => l.url), ...profile.sameAs],
+};
+// `<` is escaped so the JSON can never close the script tag.
+const jsonLd = JSON.stringify(person).replace(/</g, '\\u003c');
 ---
 
-<Base locale={locale} title={`${profile.name} — ${profile.role[locale]}`} description={t('meta.description')}>
+<Base locale={locale} title={`${profile.name} — ${profile.headline[locale]}`} description={description}>
+  <script slot="head" type="application/ld+json" set:html={jsonLd} />
   <SiteHeader locale={locale} />
   <div class="page">
     <Sidebar locale={locale} />

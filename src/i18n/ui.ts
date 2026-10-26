@@ -11,7 +11,6 @@ export const localeLabels: Localized = {
 
 const ui = {
   en: {
-    'meta.description': 'Experience, research, publications and CV.',
     'nav.label': 'Sections',
     'nav.experience': 'Experience',
     'nav.publications': 'Publications',
@@ -39,7 +38,6 @@ const ui = {
     'footer.built': 'Built with Astro.',
   },
   th: {
-    'meta.description': 'ประสบการณ์ งานวิจัย งานตีพิมพ์ และ CV',
     'nav.label': 'หัวข้อ',
     'nav.experience': 'ประสบการณ์',
     'nav.publications': 'งานตีพิมพ์',

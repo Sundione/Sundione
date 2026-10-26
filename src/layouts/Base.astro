@@ -9,16 +9,23 @@ import '@fontsource/ibm-plex-mono/latin-400.css';
 import '../styles/global.css';
 import { getAbsoluteLocaleUrl } from 'astro:i18n';
 import { locales, type Locale } from '../i18n/ui';
+import { getProfile, getShareImage } from '../utils/content';
 import { withBase } from '../utils/url';
 
 interface Props {
   locale: Locale;
   title: string;
   description: string;
+  /** The page's path without the locale, e.g. "cv/", so hreflang links point at the same page in each language. */
+  path?: string;
 }
 
-const { locale, title, description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const { locale, title, description, path = '' } = Astro.props;
+const site = Astro.site!;
+const canonical = new URL(Astro.url.pathname, site);
+const profile = await getProfile();
+const image = await getShareImage(site);
+const ogLocale = { en: 'en_US', th: 'th_TH' } satisfies Record<Locale, string>;
 ---
 
 <!doctype html>
@@ -29,12 +36,30 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {locales.map((l) => <link rel="alternate" hreflang={l} href={getAbsoluteLocaleUrl(l)} />)}
+    {locales.map((l) => <link rel="alternate" hreflang={l} href={getAbsoluteLocaleUrl(l, path)} />)}
+    <link rel="alternate" hreflang="x-default" href={getAbsoluteLocaleUrl('en', path)} />
+    <link rel="sitemap" href={withBase('sitemap-index.xml')} />
     <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
-    <meta property="og:type" content="website" />
+    <meta name="author" content={profile.name} />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={profile.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={ogLocale[locale]} />
+    {locales.filter((l) => l !== locale).map((l) => <meta property="og:locale:alternate" content={ogLocale[l]} />)}
+    {
+      image && (
+        <>
+          <meta property="og:image" content={image.url} />
+          <meta property="og:image:width" content={String(image.width)} />
+          <meta property="og:image:height" content={String(image.height)} />
+          <meta property="og:image:alt" content={profile.name} />
+        </>
+      )
+    }
+    <meta name="twitter:card" content="summary" />
+    <slot name="head" />
     <!-- Apply the saved theme before first paint so the page does not flash. -->
     <script is:inline>
       try {

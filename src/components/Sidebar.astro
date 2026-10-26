@@ -1,9 +1,8 @@
 ---
-import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { useTranslations, type Locale } from '../i18n/ui';
-import { getCvManifest, getProfile } from '../utils/content';
+import { getCvManifest, getProfile, getProfilePhoto } from '../utils/content';
 import { rich } from '../utils/rich';
 import { withBase } from '../utils/url';
 
@@ -16,9 +15,7 @@ const t = useTranslations(locale);
 const profile = await getProfile();
 const cv = getCvManifest();
 
-const photos = import.meta.glob<{ default: ImageMetadata }>('/src/assets/*.{jpg,jpeg,png,webp,avif}', { eager: true });
-const photo = profile.photo ? photos[`/src/assets/${profile.photo}`]?.default : undefined;
-if (profile.photo && !photo) throw new Error(`Profile photo src/assets/${profile.photo} not found.`);
+const photo = await getProfilePhoto();
 
 const contacts = [
   ...(profile.email ? [{ label: t('label.email'), url: `mailto:${profile.email}`, text: profile.email }] : []),

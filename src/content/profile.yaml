@@ -9,6 +9,10 @@ me:
   role:
     en: Data Scientist
     th: Data Scientist
+  # The page title in browser tabs and search results.
+  headline:
+    en: Data Scientist & NLP Researcher
+    th: Data Scientist และนักวิจัยด้าน NLP
   # Short pitch: the website sidebar and the top of the CV. Can use **bold**.
   bio:
     en: Data Scientist at a fintech company and part-time Computer Engineering master's student at Chulalongkorn University, building AI- and data-driven tools. Bronze medalist, Super AI Engineer Season 4.
@@ -33,3 +37,7 @@ me:
       cvLabel: linkedin.com/tawan-thaepprasit
     - label: GitHub
       url: https://github.com/Sundione
+  # Other profiles, not shown on the page. Search engines use these (with `links`) to
+  # tie your accounts to this site. Add Google Scholar or ORCID here when you have them.
+  sameAs:
+    - https://aclanthology.org/people/tawan-thaepprasit/

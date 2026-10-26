@@ -7,3 +7,8 @@ const htmlEscapes: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&
 export function rich(text: string) {
   return text.replace(/[&<>"']/g, (c) => htmlEscapes[c]).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 }
+
+/** Content text with the **bold** markup removed, for meta tags. */
+export function plain(text: string) {
+  return text.replace(/\*\*(.+?)\*\*/g, '$1');
+}

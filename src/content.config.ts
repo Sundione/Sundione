@@ -14,6 +14,8 @@ const profile = defineCollection({
   schema: z.object({
     name: z.string(),
     role: localized,
+    // Page title and search results, e.g. "Data Scientist & NLP Researcher".
+    headline: localized,
     // Short introduction: the sidebar and the top of the CV.
     bio: localized,
     location: localized,
@@ -22,6 +24,8 @@ const profile = defineCollection({
     photo: z.string().nullable(),
     highlight: z.object({ text: localized, href: z.string() }).optional(),
     links: z.array(link.extend({ cvLabel: z.string().optional() })),
+    // Other profiles of yours, not shown on the page. They tell search engines these accounts are the same person.
+    sameAs: z.array(z.url()).default([]),
   }),
 });
 
